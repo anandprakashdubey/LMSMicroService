@@ -1,0 +1,134 @@
+version: "3.4"
+
+networks:
+  LMSNetwork:
+  external:
+    name: LMSNetwork
+volumes:
+  orderhandlermongovolume:
+  orderservicemongovolume:
+  pharmacyservicemongovolume:
+  userprofileservicemongovolume:
+  orderhandlermongoapi:
+  orderservicemongoapi:
+  pharmacyservicemongoapi:
+  userprofileservicemongoapi:
+
+services:
+  orderhandlerdb:
+    container_name: orderhandlermongo
+    image: mongo
+    ports:
+      - 27018:27017
+    networks:
+      - LMSNetwork
+    volumes:
+      - orderhandlermongovolume:/app/data
+
+  ClientOrderHandler:
+    container_name: clientorderhandler
+    image: ${DOCKER_REGISTRY-}clientorderhandler
+    build:
+      context: .
+      dockerfile: LMS.ClientOrderHandler.API/Dockerfile
+    ports:
+      - 8001:80
+      - 8002:443
+    depends_on:
+      - orderhandlerdb
+    environment:
+      - ConnectionStrings:MongoDB=mongodb://orderhandlermongo:27017/OrderHandler
+      - PharmacyAPI=http://PharmacyService
+      - OrderAPI=http://OrderService
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - LMSNetwork
+    volumes:
+      - orderhandlermongoapi:/app/data
+
+  orderservicedb:
+    container_name: orderservicemongo
+    image: mongo
+    ports:
+      - 27019:27017
+    networks:
+      - LMSNetwork
+    volumes:
+      - orderservicemongovolume:/app/data
+
+  OrderService:
+    container_name: orderservice
+    image: ${DOCKER_REGISTRY-}orderservice
+    build:
+      context: .
+      dockerfile: LMS.OrderService.API/Dockerfile
+    ports:
+      - 8003:80
+      - 8004:443
+    depends_on:
+      - orderservicedb
+    environment:
+      - ConnectionStrings:MongoDB=mongodb://orderservicemongo:27017/OrderService
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - LMSNetwork
+    volumes:
+      - orderservicemongoapi:/app/data
+
+  pharmacyservicedb:
+    container_name: pharmacyservicemongo
+    image: mongo
+    ports:
+      - 27020:27017
+    networks:
+      - LMSNetwork
+    volumes:
+      - pharmacyservicemongovolume:/app/data
+
+  PharmacyService:
+    container_name: pharmacyservice
+    image: ${DOCKER_REGISTRY-}pharmacyservice
+    build:
+      context: .
+      dockerfile: LMS.PharmacyService.API/Dockerfile
+    ports:
+      - 8005:80
+      - 8006:443
+    depends_on:
+      - pharmacyservicedb
+    environment:
+      - ConnectionStrings:MongoDB=mongodb://pharmacyservicemongo:27017/PharmacyService
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - LMSNetwork
+    volumes:
+      - pharmacyservicemongoapi:/app/data
+
+  userprofileservicedb:
+    container_name: userprofileservicemongo
+    image: mongo
+    ports:
+      - 27021:27017
+    networks:
+      - LMSNetwork
+    volumes:
+      - userprofileservicemongovolume:/app/data
+
+  UserProfileService:
+    container_name: userprofileservice
+    image: ${DOCKER_REGISTRY-}userprofileservice
+    build:
+      context: .
+      dockerfile: LMS.UserProfile.API/Dockerfile
+    ports:
+      - 8007:80
+      - 8008:443
+    depends_on:
+      - userprofileservicedb
+    environment:
+      - ConnectionStrings:MongoDB=mongodb://userprofileservicemongo:27017/UserProfile
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - LMSNetwork
+    volumes:
+      - userprofileservicemongoapi:/app/data
