@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: userprofileservice-api-service
+  labels:
+    name: userprofileservice-api-service
+    app: LMS
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30007
+  selector:
+    name: userprofileservice-api-pod
+    app: LMS

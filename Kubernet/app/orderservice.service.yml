@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderservice-api-service
+  labels:
+    name: orderservice-api-service
+    app: LMS
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30005
+  selector:
+    name: orderservice-api-pod
+    app: LMS

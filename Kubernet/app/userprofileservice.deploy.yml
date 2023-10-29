@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userprofileservice-api-deploy
+  labels:
+    name: userprofileservice-api-deploy
+    app: LMS
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: userprofileservice-api-pod
+      app: LMS
+  template:
+    metadata:
+      name: userprofileservice-api-pod
+      labels:
+        name: userprofileservice-api-pod
+        app: LMS
+    spec:
+      containers:
+        - name: userprofileservice
+          image: anandprakashdubey/userprofileservice:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"
+            - name: ConnectionStrings_MongoDB
+              value: "mongodb://userprofileservicemongo:27017/UserProfile"

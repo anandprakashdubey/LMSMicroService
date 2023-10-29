@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: clientorderhandler-api-service
+  labels:
+    name: clientorderhandler-api-service
+    app: LMS
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30004
+  selector:
+    name: clientorderhandler-api-pod
+    app: LMS

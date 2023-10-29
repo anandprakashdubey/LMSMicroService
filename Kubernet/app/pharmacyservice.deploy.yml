@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pharmacyservice-api-deploy
+  labels:
+    name: pharmacyservice-api-deploy
+    app: LMS
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: pharmacyservice-api-pod
+      app: LMS
+  template:
+    metadata:
+      name: pharmacyservice-api-pod
+      labels:
+        name: pharmacyservice-api-pod
+        app: LMS
+    spec:
+      containers:
+        - name: pharmacyservice
+          image: anandprakashdubey/pharmacyservice:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"
+            - name: ConnectionStrings_MongoDB
+              value: "mongodb://pharmacyservicemongo:27017/PharmacyService"

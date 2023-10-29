@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderservice-api-deploy
+  labels:
+    name: orderservice-api-deploy
+    app: LMS
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: orderservice-api-pod
+      app: LMS
+  template:
+    metadata:
+      name: orderservice-api-pod
+      labels:
+        name: orderservice-api-pod
+        app: LMS
+    spec:
+      containers:
+        - name: orderservice
+          image: anandprakashdubey/orderservice:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"
+            - name: ConnectionStrings_MongoDB
+              value: "mongodb://orderservicemongo:27017/OrderService"

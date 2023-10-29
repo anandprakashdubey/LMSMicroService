@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderhandlermongo
+  labels:
+    name: orderhandlermongo-service
+    app: LMS
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    name: orderhandlermongo-pod
+    app: LMS

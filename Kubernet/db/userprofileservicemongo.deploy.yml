@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userprofileservicemongo-deploy
+  labels:
+    name: userprofileservicemongo-deploy
+    app: LMS
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: userprofileservicemongo-pod
+      app: LMS
+  template:
+    metadata:
+      name: userprofileservicemongo-pod
+      labels:
+        name: userprofileservicemongo-pod
+        app: LMS
+    spec:
+      containers:
+        - name: userprofileservicemongo
+          image: mongo
+          ports:
+            - containerPort: 27017

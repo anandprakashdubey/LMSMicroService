@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pharmacyservicemongo-deploy
+  labels:
+    name: pharmacyservicemongo-deploy
+    app: LMS
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: pharmacyservicemongo-pod
+      app: LMS
+  template:
+    metadata:
+      name: pharmacyservicemongo-pod
+      labels:
+        name: pharmacyservicemongo-pod
+        app: LMS
+    spec:
+      containers:
+        - name: pharmacyservicemongo
+          image: mongo
+          ports:
+            - containerPort: 27017

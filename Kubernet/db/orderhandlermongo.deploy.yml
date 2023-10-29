@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderhandlermongo-deploy
+  labels:
+    name: orderhandlermongo-deploy
+    app: LMS
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: orderhandlermongo-pod
+      app: LMS
+  template:
+    metadata:
+      name: orderhandlermongo-pod
+      labels:
+        name: orderhandlermongo-pod
+        app: LMS
+    spec:
+      containers:
+        - name: orderhandlermongo
+          image: mongo
+          ports:
+            - containerPort: 27017
