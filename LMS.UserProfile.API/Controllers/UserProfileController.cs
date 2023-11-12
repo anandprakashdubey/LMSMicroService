@@ -21,7 +21,7 @@ namespace LMS.UserProfile.API.Controllers
             return await _repository.CreateUser(user);
         }
 
-        [HttpGet("userbyemail")]
+        [HttpGet("userbyemail/{email}")]
         public async Task<UserProfileModel> GetUserProfileByEmail(string email)
         {
             return await _repository.GetUserByEmail(email);

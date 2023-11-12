@@ -21,7 +21,7 @@ namespace LMS.PharmacyService.API.Controllers
             return await _repository.CreatePharmacy(pharmacy);
         }
 
-        [HttpGet("pharmacybyid")]
+        [HttpGet("pharmacybyid/{id:int}")]
         public async Task<PharmacyServiceModel> GetPharmacyById(int id)
         {
             return await _repository.GetPharmacyById(id);

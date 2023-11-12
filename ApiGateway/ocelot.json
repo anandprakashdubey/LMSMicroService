@@ -1,0 +1,222 @@
+{
+  "Routes": [
+    //Invoice Api
+    {
+      "UpstreamPathTemplate": "/api/ClientInvoice/generateinvoice",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "clientorderhandler-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/ClientInvoice/generateinvoice"
+    },
+
+    //Order Api
+    {
+      "UpstreamPathTemplate": "/api/Order/createorder",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/createorder"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/orders",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/orders"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/orderitembyid/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/orderitembyid/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/updateorderstatus/{id}/{status}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/updateorderstatus/{id}/{status}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/getorderstatus/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/getorderstatus/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/orderbyid/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/orderbyid/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/orderbypharmacyid/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/orderbypharmacyid/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/deleteorder/{id}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/deleteorder/{id}"
+    }
+    //Medicine Api
+    ,
+    {
+      "UpstreamPathTemplate": "/api/Medicine/createmedicine",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pharmacyservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Medicine/createmedicine"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Medicine/medicinebyid/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pharmacyservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Medicine/medicinebyid/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Medicine/medicines",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pharmacyservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Medicine/medicines"
+    },
+    //Pharmacy Api
+    {
+      "UpstreamPathTemplate": "/api/PharmacyService/createpharmacy",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pharmacyservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/PharmacyService/createpharmacy"
+    },
+    {
+      "UpstreamPathTemplate": "/api/PharmacyService/pharmacybyid/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pharmacyservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/PharmacyService/pharmacybyid/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/PharmacyService/pharmacies",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pharmacyservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/PharmacyService/pharmacies"
+    }, 
+
+    //User Api
+    {
+      "UpstreamPathTemplate": "/api/UserProfile/createuser",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userprofileservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/UserProfile/createuser"
+    },
+    {
+      "UpstreamPathTemplate": "/api/UserProfile/userbyemail/{email}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "userprofileservice-api-service",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/UserProfile/userbyemail/{email}"
+    }
+
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://apigateway-service"
+  }
+
+}

@@ -13,6 +13,7 @@ volumes:
   orderservicemongoapi:
   pharmacyservicemongoapi:
   userprofileservicemongoapi:
+  apigatewayvolume:
 
 services:
   orderhandlerdb:
@@ -132,3 +133,16 @@ services:
       - LMSNetwork
     volumes:
       - userprofileservicemongoapi:/app/data
+
+  apigateway:
+    container_name: api-gateway
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+      - 8009:80
+    networks:
+      - LMSNetwork
+    volumes:
+      - apigatewayvolume:/app/data

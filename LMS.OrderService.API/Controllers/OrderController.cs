@@ -27,38 +27,38 @@ namespace LMS.OrderService.API.Controllers
             return await _repository.GetAllOrders();
         }
 
-        [HttpGet("orderitembyid")]
+        [HttpGet("orderitembyid/{id:int}")]
         public async Task<IEnumerable<OrderItem>> GetAllOrderItemByOrderId(int id)
         {
             return await _repository.GetAllOrderItemByOrderId(id);
         }
 
-        [HttpPost("updateorderstatus")]
+        [HttpPost("updateorderstatus/{id:int}/{status}")]
         public async Task<bool> UpdateOrderStatus(int id, string status)
         {
            return await _repository.UpdateOrderStatus(id, status);
         }
 
-        [HttpGet("getorderstatus")]
+        [HttpGet("getorderstatus/{id:int}")]
         public async Task<OrderServiceModel> GetStatus(int id)
         {
             return await _repository.GetStatus(id);
         }
 
 
-        [HttpGet("orderbyid")]
+        [HttpGet("orderbyid/{id:int}")]
         public async Task<OrderDto> GetOrderById(int id)
         {
             return await _repository.GetOrderById(id);
         }
 
-        [HttpGet("orderbypharmacyid")]
+        [HttpGet("orderbypharmacyid/{id:int}")]
         public async Task<IEnumerable<OrderDto>> GetOrderByPharmacyId(int id)
         {
             return await _repository.GetOrderByPharmacyId(id);
         }
 
-        [HttpPut("deleteorder")]
+        [HttpPut("deleteorder/{id:int}")]
         public async Task DeleteOrder(int id)
         {
             await _repository.DeleteOrder(id);

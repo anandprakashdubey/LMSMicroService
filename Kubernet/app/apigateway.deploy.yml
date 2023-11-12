@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway-api-deploy
+  labels:
+    name: apigateway-api-deploy
+    app: LMS
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: apigateway-api-pod
+      app: LMS
+  template:
+    metadata:
+      name: apigateway-api-pod
+      labels:
+        name: apigateway-api-pod
+        app: LMS
+    spec:
+      containers:
+        - name: apigateway
+          image: anandprakashdubey/apigateway:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"

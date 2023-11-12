@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: apigateway-service
+  labels:
+    name: apigateway-service
+    app: LMS
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30003
+  selector:
+    name: apigateway-api-pod
+    app: LMS
